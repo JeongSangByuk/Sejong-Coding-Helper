@@ -1,10 +1,8 @@
 package com.example.testlocal.controller;
 
 import com.example.testlocal.config.ApiKey;
-
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,7 +11,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-
 import java.util.Map;
 
 
@@ -52,7 +48,6 @@ public class ChatbotController {
     public String sendMessage(@RequestBody Map<String, Object> map) throws IOException {
 
         String chatMessage = (String)map.get("message");
-
         URL url = new URL(apiUrl);
         String message =  getReqMessage(chatMessage);
         String encodeBase64String = makeSignature(message);
@@ -86,6 +81,7 @@ public class ChatbotController {
             JSONParser jsonParser = new JSONParser();
             //JSONParser jsonParser = new JSONParser(jsonString);
             try {
+
                 JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonString);
 
                 // "bubbles": [ {"type": "text",
@@ -100,7 +96,6 @@ public class ChatbotController {
                 chatMessage = description;
 
             } catch (Exception e) {
-
                 e.printStackTrace();
             }
 
